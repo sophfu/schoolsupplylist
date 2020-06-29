@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Google Sheets API Quickstart</p>
+    <p>Results:</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" style="display: none;">Authorize</button>
+    <button id="authorize_button" style="display: none;">Click to Authorize</button>
     <button id="signout_button" style="display: none;">Sign Out</button>
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
@@ -106,15 +106,15 @@
       function listMajors() {
         gapi.client.sheets.spreadsheets.values.get({
           spreadsheetId: '1U5Ibhrn7QUFpg731nfoByWpngVWlGuz9sFhrPYrU4gI',
-          range: 'Form Responses 1!A2:E',
+          range: 'Form Responses 1!A2:H',
         }).then(function(response) {
           var range = response.result;
           if (range.values.length > 0) {
-            appendPre('Timestamp, Grade:');
+            appendPre("\n" + "Here's what we found:" + '\n' + '\n');
             for (i = 0; i < range.values.length; i++) {
               var row = range.values[i];
               // Print columns A and E, which correspond to indices 0 and 4.
-              appendPre(row[0] + ', ' + row[4]);
+              appendPre(row[2] + ' says: ' + row[6] + '\n');
             }
           } else {
             appendPre('No data found.');
